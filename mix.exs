@@ -55,7 +55,7 @@ defmodule FastHtml.Mixfile do
       {:mochiweb, "~> 2.18", only: :bench, optional: true},
       {:html5ever,
        git: "https://github.com/rusterlium/html5ever_elixir.git", only: :bench, optional: true},
-      {:nimble_pool, "~> 0.1.0"},
+      {:nimble_pool, "~> 0.2.0"},
       {:elixir_make, "~> 0.4", runtime: false}
     ]
   end
