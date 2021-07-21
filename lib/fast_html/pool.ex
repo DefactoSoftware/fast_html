@@ -98,22 +98,22 @@ defmodule FastHtml.Pool do
 
   @impl NimblePool
   @doc false
-  def handle_checkout(:checkout, {client_pid, _}, port) do
+  def handle_checkout(:checkout, {client_pid, _}, port, pool_state) do
     send(port, {self(), {:connect, client_pid}})
 
     receive do
-      {^port, :connected} -> {:ok, port, port}
+      {^port, :connected} -> {:ok, port, port, pool_state}
       {:EXIT, ^port, reason} -> {:remove, {:EXIT, reason}}
     end
   end
 
   @impl NimblePool
   @doc false
-  def handle_checkin(:timeout, _, _), do: {:remove, :timeout}
+  def handle_checkin(:timeout, _, _, pool_state), do: {:remove, :timeout, pool_state}
 
   @impl NimblePool
   @doc false
-  def handle_checkin(_, _, port), do: {:ok, port}
+  def handle_checkin(_, _, port, pool_state), do: {:ok, port, pool_state}
 
   @impl NimblePool
   @doc false
