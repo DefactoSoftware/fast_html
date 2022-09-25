@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2019-2022 Pleroma Authors <https://pleroma.social>
+# SPDX-License-Identifier: LGPL-2.1-only
+
 defmodule FastHtml.Pool do
   @behaviour NimblePool
   @moduledoc """
