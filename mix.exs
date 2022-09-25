@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2017-2019 myhtmlex authors <https://github.com/Overbryd/myhtmlex>
+# SPDX-FileCopyrightText: 2019-2022 Pleroma Authors <https://pleroma.social>
+# SPDX-License-Identifier: LGPL-2.1-only
+
 defmodule FastHtml.Mixfile do
   use Mix.Project
 
@@ -27,7 +31,7 @@ defmodule FastHtml.Mixfile do
   def package do
     [
       maintainers: ["Ariadne Conill", "rinpatch"],
-      licenses: ["GNU LGPL"],
+      licenses: ["LGPL-2.1-only"],
       links: %{
         "GitLab" => "https://git.pleroma.social/pleroma/elixir-libraries/fast_html/",
         "Issues" => "https://git.pleroma.social/pleroma/elixir-libraries/fast_html/issues",

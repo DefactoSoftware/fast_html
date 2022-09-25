@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2017-2019 myhtmlex authors <https://github.com/Overbryd/myhtmlex>
+SPDX-FileCopyrightText: 2019-2022 Pleroma Authors <https://pleroma.social>
+SPDX-License-Identifier: LGPL-2.1-only
+-->
+
 # FastHTML
 
 A C Node wrapping lexborisov's [myhtml](https://github.com/lexborisov/myhtml).
@@ -13,7 +19,6 @@ The following table provides median times it takes to decode a string to a tree 
 | File/Parser          | fast_html (Port) | mochiweb_html (erlang) | html5ever (Rust NIF) | Myhtmlex (NIF)¹ |
 |----------------------|--------------------|------------------------|----------------------|----------------|
 | document-large.html (6.9M)  | 125.12 ms          | 1778.34 ms             | 395.21 ms            | 327.17 ms      |
-| document-medium.html (85K) | 1.93 ms            | 12.10 ms               | 4.74 ms              | 3.82 ms        |
 | document-small.html  (25K)| 0.50 ms            | 2.76 ms                | 1.72 ms              | 1.19 ms        |
 | fragment-large.html  (33K)| 0.93 ms            | 4.78 ms               | 2.34 ms              | 2.15 ms        |
 | fragment-small.html²  (757B)| 44.60 μs | 42.13 μs | 43.58 μs | 289.71 μs |
