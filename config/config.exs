@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2017-2019 myhtmlex authors <https://github.com/Overbryd/myhtmlex>
+# SPDX-License-Identifier: LGPL-2.1-only
+
 # This file is responsible for configuring your application
 # and its dependencies with the aid of the Mix.Config module.
 use Mix.Config
