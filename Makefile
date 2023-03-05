@@ -37,13 +37,18 @@ endif
 
 CNODE_LDFLAGS += -lei -pthread
 
+CNODE_CFLAGS += $(CPPFLAGS) $(CFLAGS)
+CNODE_LDFLAGS += $(LDFLAGS)
+
 .PHONY: all
 
 all: priv/fasthtml_worker
 
 $(LXB_STATIC): $(LXB_PATH)
 	# Sadly, build components separately seems to sporadically fail
-	cd $(LXB_PATH); cmake -DLEXBOR_BUILD_SEPARATELY=OFF -DLEXBOR_BUILD_SHARED=OFF
+	cd $(LXB_PATH); \
+		CFLAGS='$(CPPFLAGS) $(CFLAGS)' \
+		cmake -DLEXBOR_BUILD_SEPARATELY=OFF -DLEXBOR_BUILD_SHARED=OFF
 	$(MAKE) -C $(LXB_PATH)
 
 priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_STATIC)
