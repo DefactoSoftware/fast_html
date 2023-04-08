@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.2.0] - 2023-04-08
+### Changed
+- Updated vendored lexbor to 2.2.0
+
 ## [2.0.4] - 2020-09-01
 #### Fixed
 - Regression of the gcc 10 fix in the hex package, due to an outdated submodule on the publishing machine
