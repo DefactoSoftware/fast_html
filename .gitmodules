@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2017-2019 myhtmlex authors <https://github.com/Overbryd/myhtmlex>
-# SPDX-FileCopyrightText: 2019-2022 Pleroma Authors <https://pleroma.social>
+# SPDX-FileCopyrightText: 2019-2023 Pleroma Authors <https://pleroma.social>
 # SPDX-License-Identifier: LGPL-2.1-only
 
 [submodule "c_src/lexbor"]
 	path = c_src/lexbor
-	url = https://github.com/lanodan/lexbor.git
-	branch = bugfix/gcc-10
+	url = https://github.com/lexbor/lexbor.git
+	branch = v2.2.0
