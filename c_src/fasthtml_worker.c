@@ -291,8 +291,8 @@ out: ;
     size = size >> 8;
   }
 
-  write(STDOUT_FILENO, header, sizeof(header));
-  write(STDOUT_FILENO, response.buff, response.index);
+  if(write(STDOUT_FILENO, header, sizeof(header)) <0) panic ("Failed to write header to stdout");
+  if(write(STDOUT_FILENO, response.buff, response.index) <0) panic ("Failed to write response to stdout");
   // free response
   ei_x_free (&response);
   return;
