@@ -19,9 +19,6 @@
 #endif
 
 #include "ei.h"
-#ifndef OTP_22_OR_NEWER
-# include "erl_interface.h"
-#endif
 
 #define HEADER_SIZE 4
 
@@ -77,12 +74,8 @@ static void panic(const char *fmt, ...) {
 int main(int argc, const char *argv[]) {
    state_t* state = calloc (1, sizeof(state_t));
 
-#ifdef OTP_22_OR_NEWER
   // initialize erlang client library
   ei_init ();
-#else
-  erl_init (NULL, -1);
-#endif
 
   ei_x_new (&state->buffer);
 

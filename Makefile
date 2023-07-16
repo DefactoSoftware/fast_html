@@ -29,11 +29,6 @@ CNODE_CFLAGS += -I$(ERL_INTERFACE)/include
 
 CNODE_LDFLAGS =
 
-ifeq ($(OTP22_DEF),YES)
-  CNODE_CFLAGS += -DOTP_22_OR_NEWER
-else
-  CNODE_LDFLAGS += -lerl_interface
-endif
 
 CNODE_LDFLAGS += -lei -pthread
 

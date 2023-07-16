@@ -90,28 +90,9 @@ defmodule FastHtml.Mixfile do
     end
   end
 
-  defp otp_version do
-    :erlang.system_info(:otp_release)
-    |> to_string()
-    |> String.to_integer()
-  end
-
-  defp otp_22_or_newer? do
-    otp_version() >= 22
-  end
-
-  defp make_env do
-    %{
-      "OTP22_DEF" =>
-        if otp_22_or_newer?() do
-          "YES"
-        else
-          "NO"
-        end
-    }
-  end
+  defp make_env, do: %{}
 
   defp make_error_message,
     do:
-      "Please check you have: a C compiler, GNU\Make, CMake and Erlang development headers installed before reporting an issue."
+      "Please check you have: a C compiler, GNU Make, CMake and Erlang development headers installed before reporting an issue."
 end
