@@ -4,10 +4,7 @@
 
 MIX = mix
 CMAKE = cmake
-CNODE_CFLAGS = -g -O2 -std=c99 -pedantic -Wcomment -Wextra -Wno-old-style-declaration -Wall
-
-# ignore unused parameter warnings
-CNODE_CFLAGS += -Wno-unused-parameter
+CFLAGS ?= -g -O2 -pedantic -Wcomment -Wextra -Wno-old-style-declaration -Wall
 
 # set erlang include path
 ERLANG_PATH = $(shell erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version)])])' -s init stop -noshell)
@@ -17,38 +14,29 @@ CNODE_CFLAGS += -I$(ERLANG_PATH)/include
 # that way we can pin a version and package the whole thing in hex
 # hex does not allow for non-app related dependencies.
 LXB_PATH = c_src/lexbor
-LXB_STATIC = $(LXB_PATH)/liblexbor_static.a
-CNODE_CFLAGS += -I$(LXB_PATH)/source
-# avoid undefined reference errors to phtread_mutex_trylock
-CNODE_CFLAGS += -lpthread
+LXB_AR = $(LXB_PATH)/liblexbor_static.a
+LXB_CFLAGS  = -I$(LXB_PATH)/source
+LXB_LDFLAGS = $(LXB_AR)
 
 # C-Node
 ERL_INTERFACE = $(wildcard $(ERLANG_PATH)/../lib/erl_interface-*)
-CNODE_CFLAGS += -L$(ERL_INTERFACE)/lib
 CNODE_CFLAGS += -I$(ERL_INTERFACE)/include
-
-CNODE_LDFLAGS =
-
-
-CNODE_LDFLAGS += -lei -pthread
-
-CNODE_CFLAGS += $(CPPFLAGS) $(CFLAGS)
-CNODE_LDFLAGS += $(LDFLAGS)
+CNODE_LDFLAGS += -L$(ERL_INTERFACE)/lib -lei -lpthread
 
 .PHONY: all
 
 all: priv/fasthtml_worker
 
-$(LXB_STATIC): $(LXB_PATH)
+$(LXB_AR): $(LXB_PATH)
 	# Sadly, build components separately seems to sporadically fail
 	cd $(LXB_PATH); \
-		CFLAGS='$(CPPFLAGS) $(CFLAGS)' \
+		CFLAGS='$(CFLAGS)' \
 		cmake -DLEXBOR_BUILD_SEPARATELY=OFF -DLEXBOR_BUILD_SHARED=OFF
 	$(MAKE) -C $(LXB_PATH)
 
-priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_STATIC)
+priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_AR)
 	mkdir -p priv
-	$(CC) -o $@ $< $(LXB_STATIC) $(CNODE_CFLAGS) $(CNODE_LDFLAGS)
+	$(CC) -std=c99 $(CFLAGS) $(CNODE_CFLAGS) $(LXB_CFLAGS) -o $@ $< $(LDFLAGS) $(CNODE_LDFLAGS) $(LXB_LDFLAGS)
 
 clean: clean-myhtml
 	$(RM) -r priv/myhtmlex*
