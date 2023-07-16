@@ -6,7 +6,7 @@ SPDX-License-Identifier: LGPL-2.1-only
 
 # FastHTML
 
-A C Node wrapping lexborisov's [myhtml](https://github.com/lexborisov/myhtml).
+A C Node wrapping [lexbor](https://github.com/lexbor/lexbor).
 Primarily used with [FastSanitize](https://git.pleroma.social/pleroma/fast_sanitize).
 
 * Available as a hex package: `{:fast_html, "~> 2.0"}`

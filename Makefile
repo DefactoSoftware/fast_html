@@ -10,7 +10,7 @@ CFLAGS ?= -g -O2 -pedantic -Wcomment -Wextra -Wno-old-style-declaration -Wall
 ERLANG_PATH = $(shell erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version)])])' -s init stop -noshell)
 CNODE_CFLAGS += -I$(ERLANG_PATH)/include
 
-# expecting myhtml as a submodule in c_src/
+# expecting lexbor as a submodule in c_src/
 # that way we can pin a version and package the whole thing in hex
 # hex does not allow for non-app related dependencies.
 LXB_PATH = c_src/lexbor
@@ -45,4 +45,4 @@ clean: clean-myhtml
 	$(RM) -r package-test
 
 clean-myhtml:
-	$(MAKE) -C $(MYHTML_PATH) clean
+	$(MAKE) -C $(LXB_PATH) clean
