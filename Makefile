@@ -12,11 +12,17 @@ CNODE_CFLAGS += -I$(ERLANG_PATH)/include
 
 # expecting lexbor as a submodule in c_src/
 # that way we can pin a version and package the whole thing in hex
-# hex does not allow for non-app related dependencies.
 LXB_PATH = c_src/lexbor
 LXB_AR = $(LXB_PATH)/liblexbor_static.a
-LXB_CFLAGS  = -I$(LXB_PATH)/source
-LXB_LDFLAGS = $(LXB_AR)
+ifeq ($(WITH_SYSTEM_LEXBOR),1)
+  LXB_CFLAGS  =
+  LXB_LDFLAGS = -llexbor
+  LXB_DEPS =
+else
+  LXB_CFLAGS  = -I$(LXB_PATH)/source
+  LXB_LDFLAGS = $(LXB_AR)
+  LXB_DEPS = $(LXB_AR)
+endif
 
 # C-Node
 ERL_INTERFACE = $(wildcard $(ERLANG_PATH)/../lib/erl_interface-*)
@@ -34,7 +40,7 @@ $(LXB_AR): $(LXB_PATH)
 		cmake -DLEXBOR_BUILD_SEPARATELY=OFF -DLEXBOR_BUILD_SHARED=OFF
 	$(MAKE) -C $(LXB_PATH)
 
-priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_AR)
+priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_DEPS)
 	mkdir -p priv
 	$(CC) -std=c99 $(CFLAGS) $(CNODE_CFLAGS) $(LXB_CFLAGS) -o $@ $< $(LDFLAGS) $(CNODE_LDFLAGS) $(LXB_LDFLAGS)
 

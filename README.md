@@ -12,6 +12,14 @@ Primarily used with [FastSanitize](https://git.pleroma.social/pleroma/fast_sanit
 * Available as a hex package: `{:fast_html, "~> 2.0"}`
 * [Documentation](https://hexdocs.pm/fast_html/fast_html.html)
 
+## Compiling
+- GNU Make
+- C Compiler
+- Erlang 22.0+ with development headers
+- (optional) [lexbor](https://github.com/lexbor/lexbor) 2.2.0+
+
+If you want to use a system installation of lexbor, you can set `WITH_SYSTEM_LEXBOR=1` during compilation time. By default it will used the vendored version present at `c_src/lexbor`.
+
 ## Benchmarks
 
 The following table provides median times it takes to decode a string to a tree for html parsers that can be used from Elixir. Benchmarks were conducted on a machine with an `AMD Ryzen 9 3950X (32) @ 3.500GHz` CPU and 32GB of RAM. The `mix fast_html.bench` task can be used for running the benchmark by yourself.
