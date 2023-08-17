@@ -25,3 +25,6 @@ priv/*
 !priv/.gitignore
 bench/snapshots
 package-test
+
+# Library with CI, mix.lock is just a maintenance burden
+/mix.lock
