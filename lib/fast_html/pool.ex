@@ -94,6 +94,16 @@ defmodule FastHtml.Pool do
 
   @impl NimblePool
   @doc false
+  def terminate_worker({:exit_status, 143}, port, pool_state) do
+    Logger.warn(fn ->
+      "[#{__MODULE__}]: Port #{port} received a SIGTERM and is shutting down"
+    end)
+
+    :stop
+  end
+
+  @impl NimblePool
+  @doc false
   def terminate_worker(_reason, port, pool_state) do
     Port.close(port)
     {:ok, pool_state}
