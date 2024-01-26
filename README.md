@@ -6,11 +6,19 @@ SPDX-License-Identifier: LGPL-2.1-only
 
 # FastHTML
 
-A C Node wrapping lexborisov's [myhtml](https://github.com/lexborisov/myhtml).
+A C Node wrapping [lexbor](https://github.com/lexbor/lexbor).
 Primarily used with [FastSanitize](https://git.pleroma.social/pleroma/fast_sanitize).
 
 * Available as a hex package: `{:fast_html, "~> 2.0"}`
 * [Documentation](https://hexdocs.pm/fast_html/fast_html.html)
+
+## Compiling
+- GNU Make
+- C Compiler
+- Erlang 22.0+ with development headers
+- (optional) [lexbor](https://github.com/lexbor/lexbor) 2.2.0+
+
+If you want to use a system installation of lexbor, you can set `WITH_SYSTEM_LEXBOR=1` during compilation time. By default it will used the vendored version present at `c_src/lexbor`.
 
 ## Benchmarks
 
