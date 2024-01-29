@@ -8,6 +8,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.3.0] - 2023-08-18
+## Added
+- Ability to use system lexbor
+
+## Removed
+- Remove compatibility for Erlang <22
+
+## Changed
+- Allow custom CFLAGS
+- Updated vendored lexbor to 2.3.0
+
 ## [2.2.0] - 2023-04-08
 ### Changed
 - Updated vendored lexbor to 2.2.0

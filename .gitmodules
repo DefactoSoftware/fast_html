@@ -5,4 +5,4 @@
 [submodule "c_src/lexbor"]
 	path = c_src/lexbor
 	url = https://github.com/lexbor/lexbor.git
-	branch = v2.2.0
+	branch = v2.3.0
