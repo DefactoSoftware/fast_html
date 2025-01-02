@@ -24,7 +24,8 @@ defmodule FastHtml.Mixfile do
         library lexbor, being fast and correct
         in regards to the html spec.
       """,
-      docs: docs()
+      docs: docs(),
+      test_coverage: [summary: [threshold: 50]]
     ]
   end
 
