@@ -42,7 +42,7 @@ $(LXB_AR): $(LXB_PATH)
 
 priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_DEPS)
 	mkdir -p priv
-	$(CC) -std=c99 $(CFLAGS) $(CNODE_CFLAGS) $(LXB_CFLAGS) -o $@ $< $(LDFLAGS) -lm $(CNODE_LDFLAGS) $(LXB_LDFLAGS)
+	$(CC) -std=c99 $(CFLAGS) $(CNODE_CFLAGS) $(LXB_CFLAGS) -o $@ $< $(LDFLAGS) $(CNODE_LDFLAGS) $(LXB_LDFLAGS) -lm
 
 clean: clean-myhtml
 	$(RM) -r priv/myhtmlex*
