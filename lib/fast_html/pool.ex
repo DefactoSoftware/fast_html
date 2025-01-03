@@ -85,7 +85,7 @@ defmodule FastHtml.Pool do
   @impl NimblePool
   @doc false
   def terminate_worker({:EXIT, reason}, port, pool_state) do
-    Logger.warn(fn ->
+    Logger.warning(fn ->
       "[#{__MODULE__}]: Port #{port} unexpectedly exited with reason: #{reason}"
     end)
 

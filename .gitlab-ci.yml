@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2019-2022 Pleroma Authors <https://pleroma.social>
 # SPDX-License-Identifier: LGPL-2.1-only
 
-image: elixir:1.12-alpine
+image: elixir:1.14-alpine
 
 variables:
   MIX_ENV: test

@@ -9,7 +9,7 @@ defmodule FastHtml.Mixfile do
     [
       app: :fast_html,
       version: "2.4.1",
-      elixir: "~> 1.11",
+      elixir: "~> 1.14",
       deps: deps(),
       package: package(),
       compilers: [:elixir_make] ++ Mix.compilers(),
@@ -24,7 +24,8 @@ defmodule FastHtml.Mixfile do
         library lexbor, being fast and correct
         in regards to the html spec.
       """,
-      docs: docs()
+      docs: docs(),
+      test_coverage: [summary: [threshold: 50]]
     ]
   end
 
