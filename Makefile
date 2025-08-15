@@ -5,6 +5,7 @@
 MIX = mix
 CMAKE = cmake
 CFLAGS ?= -g -O2 -pedantic -Wcomment -Wextra -Wno-old-style-declaration -Wall
+CPPFLAGS ?=
 
 # set erlang include path
 ERLANG_PATH = $(shell erl -eval 'io:format("~s", [lists:concat([code:root_dir(), "/erts-", erlang:system_info(version)])])' -s init stop -noshell)
@@ -37,12 +38,13 @@ $(LXB_AR): $(LXB_PATH)
 	# Sadly, build components separately seems to sporadically fail
 	cd $(LXB_PATH); \
 		CFLAGS='$(CFLAGS)' \
+		CPPFLAGS='$(CPPFLAGS)' \
 		cmake -DLEXBOR_BUILD_SEPARATELY=OFF -DLEXBOR_BUILD_SHARED=OFF
 	$(MAKE) -C $(LXB_PATH)
 
 priv/fasthtml_worker: c_src/fasthtml_worker.c $(LXB_DEPS)
 	mkdir -p priv
-	$(CC) -std=c99 $(CFLAGS) $(CNODE_CFLAGS) $(LXB_CFLAGS) -o $@ $< $(LDFLAGS) $(CNODE_LDFLAGS) $(LXB_LDFLAGS) -lm
+	$(CC) -std=c99 $(CFLAGS) $(CPPFLAGS) $(CNODE_CFLAGS) $(LXB_CFLAGS) -o $@ $< $(LDFLAGS) $(CNODE_LDFLAGS) $(LXB_LDFLAGS) -lm
 
 clean: clean-myhtml
 	$(RM) -r priv/myhtmlex*
