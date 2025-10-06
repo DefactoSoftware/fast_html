@@ -141,4 +141,15 @@ defmodule FastHtml.Pool do
   @impl NimblePool
   @doc false
   def handle_info({_sending_port, {:data, _}}, port), do: {:ok, port}
+
+  # Catch-all for any unexpected messages (e.g., during SIGTERM shutdown)
+  @impl NimblePool
+  @doc false
+  def handle_info(msg, port) do
+    Logger.debug(fn ->
+      "[#{__MODULE__}]: Received unexpected message: #{inspect(msg)}"
+    end)
+
+    {:ok, port}
+  end
 end
