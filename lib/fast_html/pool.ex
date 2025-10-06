@@ -86,7 +86,7 @@ defmodule FastHtml.Pool do
   @doc false
   def terminate_worker({:EXIT, reason}, port, pool_state) do
     Logger.warning(fn ->
-      "[#{__MODULE__}]: Port #{port} unexpectedly exited with reason: #{reason}"
+      "[#{__MODULE__}]: Port #{inspect(port)} unexpectedly exited with reason: #{inspect(reason)}"
     end)
 
     {:ok, pool_state}
