@@ -95,7 +95,16 @@ defmodule FastHtml.Pool do
   @impl NimblePool
   @doc false
   def terminate_worker(_reason, port, pool_state) do
-    Port.close(port)
+    # During SIGTERM shutdown, the OS may kill the C port process before
+    # the Elixir supervisor can gracefully shutdown. We wrap Port.close/1
+    # in a try-catch to handle the case where the port is already dead.
+    try do
+      Port.close(port)
+    catch
+      # Silently ignore :badarg when closing an already-dead port
+      :error, :badarg -> :ok
+    end
+
     {:ok, pool_state}
   end
 
